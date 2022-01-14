@@ -50,10 +50,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     except:
         errorMessage = "Erreur de connexion a la base SQL"
 
-    if name:
-        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
+    if errorMessage != "":
+        return func.HttpResponse(dataString + nameMessage + errorMessage, status_code=500)
+
     else:
-        return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-             status_code=200
-        )
+        return func.HttpResponse(dataString + nameMessage + " Connexions réussies a Neo4j et SQL!")
