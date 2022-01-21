@@ -35,22 +35,22 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             if gender:
                 if actor:
                     if director:
-                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = " + str(gender) + " AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(actor) + " AND category = 'acted in' INTERSECT SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(director) " AND category = 'directed')"
+                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = \'" + str(gender) + "\' AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(actor) + "\' AND category = 'acted in' INTERSECT SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(director) "\' AND category = 'directed')"
                     else:
-                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = " + str(gender) + " AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(actor) + " AND category = 'acted in')"
+                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = \'" + str(gender) + "\' AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(actor) + "\' AND category = 'acted in')"
                 else:
                     if director:
-                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = " + str(gender) + " AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(director) " AND category = 'directed')"
+                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = \'" + str(gender) + "\' AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(director) "\' AND category = 'directed')"
                     else:
-                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = " + str(gender)
+                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND genre = \'" + str(gender) + "\'"
             else:
                 if actor:
                     if director:
-                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(actor) + " AND category = 'acted in' INTERSECT SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(director) " AND category = 'directed')"
+                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(actor) + "\' AND category = 'acted in' INTERSECT SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(director) "\' AND category = 'directed')"
                     else:
-                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(actor) + " AND category = 'acted in')"
+                        myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(actor) + "\' AND category = 'acted in')"
                 else:
-                    myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = " + str(director) " AND category = 'directed')"
+                    myRequest = "SELECT AVG(runtimeMinutes) FROM dbo.tTitles, dbo.tGenres WHERE dbo.tTitles.tconst = dbo.tGenres.tconst AND dbo.tTitles.tconst IN (SELECT tconst FROM dbo.tPrincipals WHERE nconst = \'" + str(director) "\' AND category = 'directed')"
             cursor.execute(myRequest)
             rows = cursor.fetchall()
             for row in rows:
