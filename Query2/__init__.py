@@ -29,11 +29,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     password = os.environ["TPBDD_PASSWORD"]
     driver= '{ODBC Driver 17 for SQL Server}'
 
-    neo4j_server = os.environ["TPBDD_NEO4J_SERVER"]
-    neo4j_user = os.environ["TPBDD_NEO4J_USER"]
-    neo4j_password = os.environ["TPBDD_NEO4J_PASSWORD"]
-
-    if len(server)==0 or len(database)==0 or len(username)==0 or len(password)==0 or len(neo4j_server)==0 or len(neo4j_user)==0 or len(neo4j_password)==0:
+    if len(server)==0 or len(database)==0 or len(username)==0 or len(password)==0:
         return func.HttpResponse("Au moins une des variables d'environnement n'a pas été initialisée.", status_code=500)
         
     errorMessage = ""
@@ -54,4 +50,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(dataString + errorMessage, status_code=500)
 
     else:
-        return func.HttpResponse(dataString + " Connexions réussies a Neo4j et SQL!")
+        return func.HttpResponse(dataString + " Connexions réussies à SQL!")
